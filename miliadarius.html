@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Milia Darius — Websites, dashboards & AI agents on subscription</title>
+<meta name="description" content="Milia Darius builds and runs your websites, dashboards, and AI agents on one flat monthly subscription. No hiring, no scope creep — just work that ships." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F6F8;
+    --panel:#FFFFFF;
+    --ink:#171D33;
+    --ink-soft:#4A5168;
+    --line:#DDE1EA;
+    --cobalt:#2B4BF2;
+    --cobalt-deep:#1E36BF;
+    --live:#1FA97C;
+    --amber:#E8A13C;
+    --radius:14px;
+    --font-display:'Unbounded',sans-serif;
+    --font-body:'Instrument Sans',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:6px;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,246,248,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .logo{font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:.02em;}
+  .logo span{color:var(--cobalt);}
+  .nav-links{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:500;color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--ink);}
+  .btn{
+    display:inline-block;background:var(--cobalt);color:#fff;
+    padding:11px 22px;border-radius:10px;font-weight:600;font-size:15px;
+    border:none;cursor:pointer;transition:background .15s ease,transform .15s ease;
+  }
+  .btn:hover{background:var(--cobalt-deep);transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent;color:var(--ink);border:1px solid var(--line);
+  }
+  .btn-ghost:hover{background:#fff;border-color:var(--ink-soft);transform:translateY(-1px);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:88px 0 72px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:12.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--cobalt);display:flex;align-items:center;gap:8px;margin-bottom:20px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--live);display:inline-block;animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{
+    font-family:var(--font-display);font-weight:600;
+    font-size:clamp(30px,4.4vw,50px);line-height:1.14;letter-spacing:-.01em;
+    margin-bottom:22px;
+  }
+  h1 em{font-style:normal;color:var(--cobalt);}
+  .hero p.lede{font-size:19px;color:var(--ink-soft);max-width:480px;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-note{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;}
+
+  /* ---------- Console (signature) ---------- */
+  .console{
+    background:var(--ink);color:#E8EAF2;border-radius:var(--radius);
+    box-shadow:0 24px 60px -24px rgba(23,29,51,.45);
+    overflow:hidden;font-family:var(--font-mono);font-size:13.5px;
+  }
+  .console-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .console-bar .title{letter-spacing:.06em;font-size:12px;text-transform:uppercase;color:#9BA3BC;}
+  .console-bar .status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--live);}
+  .console-body{padding:18px;display:flex;flex-direction:column;gap:10px;min-height:270px;}
+  .task{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:11px 13px;border:1px solid rgba(255,255,255,.08);
+    border-radius:9px;background:rgba(255,255,255,.03);
+    opacity:0;transform:translateY(8px);
+    animation:taskIn .5s ease forwards;
+  }
+  @keyframes taskIn{to{opacity:1;transform:translateY(0);}}
+  .task .tag{
+    flex-shrink:0;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    padding:3px 8px;border-radius:5px;margin-top:1px;
+  }
+  .tag-agent{background:rgba(31,169,124,.16);color:#4FD6A8;}
+  .tag-build{background:rgba(43,75,242,.2);color:#8FA2FF;}
+  .tag-care{background:rgba(232,161,60,.16);color:#F2C078;}
+  .task .txt{color:#C7CCDD;line-height:1.5;}
+  .task .txt b{color:#fff;font-weight:500;}
+  .console-foot{
+    padding:12px 18px;border-top:1px solid rgba(255,255,255,.1);
+    font-size:11.5px;color:#9BA3BC;display:flex;justify-content:space-between;
+  }
+
+  /* ---------- Sections ---------- */
+  section{padding:76px 0;}
+  .sec-head{max-width:620px;margin-bottom:48px;}
+  .sec-head .eyebrow{color:var(--ink-soft);}
+  h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3vw,34px);line-height:1.2;margin-bottom:14px;}
+  .sec-head p{color:var(--ink-soft);font-size:17.5px;}
+
+  /* Services */
+  .services{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .svc{
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 26px;background:var(--paper);
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .svc:hover{transform:translateY(-4px);box-shadow:0 16px 36px -20px rgba(23,29,51,.3);border-color:#C4CBDD;}
+  .svc .svc-label{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--cobalt);margin-bottom:14px;display:block;
+  }
+  .svc h3{font-size:20px;font-weight:600;margin-bottom:10px;}
+  .svc p{color:var(--ink-soft);font-size:15.5px;margin-bottom:16px;}
+  .svc ul{list-style:none;}
+  .svc li{
+    font-size:14.5px;color:var(--ink-soft);padding:7px 0;border-top:1px dashed var(--line);
+  }
+  .svc li::before{content:"— ";color:var(--cobalt);}
+
+  /* How it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step;}
+  .step{border-left:2px solid var(--line);padding:4px 0 4px 22px;position:relative;}
+  .step::before{
+    counter-increment:step;content:counter(step,decimal-leading-zero);
+    font-family:var(--font-mono);font-size:13px;color:var(--cobalt);
+    display:block;margin-bottom:10px;
+  }
+  .step h3{font-size:18px;font-weight:600;margin-bottom:8px;}
+  .step p{color:var(--ink-soft);font-size:15.5px;}
+
+  /* Pricing */
+  .pricing{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+  .plan{
+    border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;
+    background:var(--paper);display:flex;flex-direction:column;
+  }
+  .plan.featured{
+    background:var(--ink);color:#fff;border-color:var(--ink);
+    box-shadow:0 24px 50px -24px rgba(23,29,51,.5);
+  }
+  .plan .plan-name{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:14px;}
+  .plan.featured .plan-name{color:#8FA2FF;}
+  .plan .price{font-family:var(--font-display);font-weight:600;font-size:34px;margin-bottom:4px;}
+  .plan .per{font-size:14px;color:var(--ink-soft);margin-bottom:20px;}
+  .plan.featured .per{color:#AEB5CB;}
+  .plan ul{list-style:none;flex:1;margin-bottom:24px;}
+  .plan li{font-size:15px;padding:8px 0;border-top:1px dashed var(--line);color:var(--ink-soft);}
+  .plan.featured li{border-top-color:rgba(255,255,255,.14);color:#C7CCDD;}
+  .plan li::before{content:"✓ ";color:var(--live);font-weight:600;}
+  .plan .btn{width:100%;text-align:center;}
+  .plan.featured .btn{background:var(--cobalt);}
+  .plan .btn-ghost{background:transparent;}
+  .plan-note{text-align:center;margin-top:26px;font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);}
+
+  /* CTA */
+  .cta{padding:90px 0;}
+  .cta-card{
+    background:var(--cobalt);color:#fff;border-radius:20px;
+    padding:64px 48px;text-align:center;
+    background-image:radial-gradient(ellipse at top left,rgba(255,255,255,.14),transparent 55%);
+  }
+  .cta-card h2{margin-bottom:14px;}
+  .cta-card p{color:#D7DEFF;max-width:460px;margin:0 auto 30px;}
+  .cta-card .btn{background:#fff;color:var(--cobalt-deep);}
+  .cta-card .btn:hover{background:#EDF0FF;}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(--ink-soft);}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .foot .mono{font-family:var(--font-mono);font-size:12px;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .svc-grid,.steps,.price-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero{padding:56px 0 48px;}
+    section{padding:56px 0;}
+    .cta-card{padding:48px 24px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">MILIA<span>DARIUS</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#services">What we build</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="btn" href="#pricing">Start a subscription</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Accepting new subscribers</p>
+        <h1>Your websites, dashboards & AI agents. <em>One subscription.</em></h1>
+        <p class="lede">Milia Darius builds and runs your digital operations for a flat monthly fee — no hiring, no hourly billing, no scope creep. Just work that ships, every week.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#pricing">See plans</a>
+          <a class="btn btn-ghost" href="#services">What we build</a>
+        </div>
+        <p class="hero-note">// pause or cancel anytime — no contracts</p>
+      </div>
+
+      <!-- Signature: live ops console -->
+      <div class="console" aria-label="Example of work delivered on subscription">
+        <div class="console-bar">
+          <span class="title">miliadarius / client-ops</span>
+          <span class="status"><span class="dot" aria-hidden="true"></span>live</span>
+        </div>
+        <div class="console-body" id="taskFeed"></div>
+        <div class="console-foot">
+          <span>this week: 14 tasks shipped</span>
+          <span>uptime 99.98%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What we build</p>
+        <h2>Three services. One flat fee.</h2>
+        <p>Everything a growing business needs to run online — designed, built, and maintained by the same team, month after month.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc">
+          <span class="svc-label">Service / 01</span>
+          <h3>Websites</h3>
+          <p>Fast, modern sites that you never have to think about again. We design, launch, host, and keep improving them.</p>
+          <ul>
+            <li>Marketing & landing pages</li>
+            <li>E-commerce storefronts</li>
+            <li>SEO, hosting & updates included</li>
+          </ul>
+        </article>
+        <article class="svc">
+          <span class="svc-label">Service / 02</span>
+          <h3>Dashboards & tools</h3>
+          <p>Custom dashboards and internal tools that put your numbers, orders, and operations in one place.</p>
+          <ul>
+            <li>Sales & operations dashboards</li>
+            <li>Admin panels & internal tools</li>
+            <li>Integrations with your existing apps</li>
+          </ul>
+        </article>
+        <article class="svc">
+          <span class="svc-label">Service / 03</span>
+          <h3>AI agents</h3>
+          <p>Agents that work around the clock — answering customers, entering data, and preparing reports so your team doesn't have to.</p>
+          <ul>
+            <li>Customer support agents</li>
+            <li>Data entry & reporting agents</li>
+            <li>Monitored and tuned by us weekly</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Subscribe, request, receive.</h2>
+        <p>We replaced proposals and invoices with a simple loop you can start — or pause — whenever you want.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Pick a plan</h3>
+          <p>Choose the subscription that fits your workload. You get a private request board the same day.</p>
+        </div>
+        <div class="step">
+          <h3>Add requests</h3>
+          <p>Drop in anything — a new landing page, a dashboard tweak, a support agent. We work through the queue one at a time.</p>
+        </div>
+        <div class="step">
+          <h3>Get updates weekly</h3>
+          <p>Work ships in days, not months. Everything we build is monitored and maintained as long as you're subscribed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Pricing</p>
+        <h2>Flat monthly plans.</h2>
+        <p>No hourly billing, no surprise invoices. Pause or cancel anytime.</p>
+      </div>
+      <div class="price-grid">
+        <div class="plan">
+          <p class="plan-name">Site</p>
+          <p class="price">$1,495</p>
+          <p class="per">per month</p>
+          <ul>
+            <li>One active request at a time</li>
+            <li>Website design & development</li>
+            <li>Hosting, updates & maintenance</li>
+            <li>Average 3–5 day turnaround</li>
+          </ul>
+          <a class="btn btn-ghost" href="mailto:hello@miliadarius.com?subject=Site%20plan">Start with Site</a>
+        </div>
+        <div class="plan featured">
+          <p class="plan-name">Operations — most popular</p>
+          <p class="price">$2,995</p>
+          <p class="per">per month</p>
+          <ul>
+            <li>Two active requests at a time</li>
+            <li>Websites + custom dashboards</li>
+            <li>One AI agent, run & monitored</li>
+            <li>Priority 48-hour turnaround</li>
+          </ul>
+          <a class="btn" href="mailto:hello@miliadarius.com?subject=Operations%20plan">Start with Operations</a>
+        </div>
+        <div class="plan">
+          <p class="plan-name">Autopilot</p>
+          <p class="price">$5,495</p>
+          <p class="per">per month</p>
+          <ul>
+            <li>Unlimited request queue</li>
+            <li>Full agent fleet — support, data, reports</li>
+            <li>Dedicated Slack channel</li>
+            <li>Same-week delivery on most requests</li>
+          </ul>
+          <a class="btn btn-ghost" href="mailto:hello@miliadarius.com?subject=Autopilot%20plan">Start with Autopilot</a>
+        </div>
+      </div>
+      <p class="plan-note">// one-time builds (custom setup & integrations) quoted separately</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta wrap">
+    <div class="cta-card">
+      <h2>Stop hiring. Start subscribing.</h2>
+      <p>Book a 20-minute intro call and we'll map out what your first month of requests could look like.</p>
+      <a class="btn" href="mailto:hello@miliadarius.com?subject=Intro%20call">Book an intro call</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="logo" style="font-size:14px;">MILIA<span style="color:var(--cobalt)">DARIUS</span></span>
+    <span>hello@miliadarius.com</span>
+    <span class="mono">© 2026 Milia Darius. All systems operational.</span>
+  </div>
+</footer>
+
+<script>
+  // Rotating task feed in the hero console
+  const tasks = [
+    {tag:'agent', cls:'tag-agent', txt:'Support agent replied to <b>6 customer tickets</b> — avg response 42s'},
+    {tag:'build', cls:'tag-build', txt:'Shipped <b>revenue dashboard v2.4</b> — added weekly cohort view'},
+    {tag:'care',  cls:'tag-care',  txt:'Site health check passed — <b>0 broken links</b>, load time 0.8s'},
+    {tag:'agent', cls:'tag-agent', txt:'Data agent synced <b>218 orders</b> from Shopify → dashboard'},
+    {tag:'build', cls:'tag-build', txt:'New landing page live: <b>/spring-promo</b> — mobile score 98'},
+    {tag:'agent', cls:'tag-agent', txt:'Report agent sent the <b>Monday KPI digest</b> to 4 inboxes'},
+    {tag:'care',  cls:'tag-care',  txt:'Renewed SSL + updated dependencies across <b>3 client sites</b>'},
+  ];
+  const feed = document.getElementById('taskFeed');
+  const MAX = 4;
+  let i = 0;
+  function addTask(){
+    const t = tasks[i % tasks.length]; i++;
+    const el = document.createElement('div');
+    el.className = 'task';
+    el.innerHTML = '<span class="tag '+t.cls+'">'+t.tag+'</span><span class="txt">'+t.txt+'</span>';
+    feed.prepend(el);
+    while(feed.children.length > MAX) feed.removeChild(feed.lastChild);
+  }
+  addTask(); addTask(); addTask();
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced) setInterval(addTask, 3200);
+</script>
+
+</body>
+</html>
